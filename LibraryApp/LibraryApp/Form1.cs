@@ -77,24 +77,7 @@ namespace LibraryApp
             public static ObjectId idKorisnika { get; set; }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var connectionString = "mongodb://localhost/?safe=true";
-            var client = new MongoClient(connectionString);
-            var db = client.GetDatabase("Library");
-            var collection = db.GetCollection<Dokument>("Dokument");
-            Dokument dokument = new Dokument();
-
-            var fs = new GridFSBucket(db);
-            var id = UploadFile(fs);
-            dokument.DocId = id;
-            ObjectId idd = new ObjectId("5e459c8953df61f3e3cc60a7");
-            dokument.Naziv = "Na Drini cuprija";
-            dokument.Knjiga = idd;
-            collection.InsertOne(dokument);
-
-
-        }
+        
         private static ObjectId UploadFile(GridFSBucket fs)
         {
             using (var s = File.OpenRead(@"C:\Users\38160\Desktop\Na Drini cuprija.pdf"))
